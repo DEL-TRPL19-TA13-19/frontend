@@ -1,28 +1,8 @@
-// import { createStore } from "vuex";
-//
-// const store = createStore({
-//   state() {
-//     return {
-//       count: 0,
-//     };
+const debug = import.meta.env.MODE !== "production";
+// export const store = createStore({
+//   modules: {
+//     auth,
 //   },
-//   mutations: {
-//     increment(state) {
-//       state.count++;
-//     },
-//   },
+//   plugins: debug ? [createLogger()] : [],
+//   strict: debug,
 // });
-//
-// export default store;
-
-import { createLogger, createStore } from "vuex";
-import auth from "@/store/auth";
-
-const debug = process.env.NODE_ENV !== "production";
-export const store = createStore({
-  modules: {
-    auth,
-  },
-  plugins: debug ? [createLogger()] : [],
-  strict: debug,
-});
