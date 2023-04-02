@@ -1,5 +1,10 @@
 <template>
-  <h1>Halaman home</h1>
+  <div>
+      <b-container>
+          <h3>D A S H B O A R D</h3>
+          <hr>
+      </b-container>
+  </div>
 </template>
 
 <script>
@@ -53,10 +58,14 @@ export default {
         });
     },
   },
-  mounted() {
-    // this.retrieveTPS();
-    // this.findTPSByID();
-    // this.createTPS();
-  },
+  // mounted() {
+  //   this.retrieveTPS();
+  //   // this.findTPSByID();
+  //   // this.createTPS();
+  // },
 };
 </script>
+
+<style>
+@import "../assets/css/home.css";
+</style>

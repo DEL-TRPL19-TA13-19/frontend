@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="light">
+    <b-navbar toggleable="lg" type="dark" variant="info">
       <b-navbar-brand to="/">Penentuan Lokasi TPS
       </b-navbar-brand>
 
