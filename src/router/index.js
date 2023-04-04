@@ -5,6 +5,10 @@ const routes = [
     path: "/login",
     name: "login",
     component: () => import("@/pages/Login.vue"),
+    meta: {
+      hideNavbar: true,
+      hideFooter: true,
+    }
   },
   {
     path: "/",

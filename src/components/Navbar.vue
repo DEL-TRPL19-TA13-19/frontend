@@ -8,11 +8,19 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="mx-auto">
-          <b-nav-item href="#">Link</b-nav-item>
-          <b-nav-item disabled href="#">Disabled</b-nav-item>
+          <b-nav-item href="/login">Login</b-nav-item>
+            <b-nav-item href="/">Dashboard</b-nav-item>
+            <b-nav-item href="/collections">Collections</b-nav-item>
+            <b-nav-item href="#">Alternatives</b-nav-item>
+            <b-nav-item href="#">Penilaian</b-nav-item>
+            <b-nav-item href="#">Perhitungan</b-nav-item>
+            <b-nav-item href="#">Hasil Akhir</b-nav-item>
+            <b-nav-item href="#">User</b-nav-item>
+            <b-nav-item href="#">Profile</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
   </div>
 </template>
-<script setup></script>
+<script setup>
+</script>

@@ -1,11 +1,86 @@
-.exampleHome {
-    background: black;
+.dashboard-card{
+    display: flex;
+    flex-direction: row;
+    padding: 25px;
+    max-width: 450px;
+    height: 150px;
+    margin: 25px 20px 25px 20px;
+    justify-content: space-around;
 }
 
-.exampleLogin {
-    background: red;
+.dashboard-card > h3{
+    flex-grow: 8;
 }
 
-.example {
-    background: red;
+.dashboard-card > img{
+    flex-grow: 2;
+    width: 30px;
+    height: 30px;
+}
+
+.dashboard-card:hover{
+    box-shadow: 10px 10px black;
+}
+
+.dashboard-card-deck{
+    padding: 25px;
+}
+
+b-row{
+    width: 100%;
+}
+
+.icon{
+    width: 50px;
+    height: 50px;
+}
+
+.title{
+    margin: 40px;
+}
+
+.link {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.card-yellow{
+    border: 0px solid #FFF507;
+    border-left-width: 10px;
+    background-color: #FFF7AC;
+}
+
+.card-blue{
+    border: 0px solid #44ABEC;
+    border-left-width: 10px;
+    background-color: #B0E1FF;
+}
+
+.card-red{
+    border: 0px solid #F55B5B;
+    border-left-width: 10px;
+    background-color: #FFD7D7;
+}
+
+.card-magenta{
+    border: 0px solid #C862CA;
+    border-left-width: 10px;
+    background-color: #FECFFF;
+}
+
+.card-orange{
+    border: 0px solid #FF9C0C;
+    border-left-width: 10px;
+    background-color: #FEE7A3;
+}
+
+.card-green{
+    border: 0px solid #4BB14F;
+    border-left-width: 10px;
+    background-color: #ADFFB0;
+;
 }
