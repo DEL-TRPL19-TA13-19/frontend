@@ -1,5 +1,6 @@
 export const endpoint = {
-  auth: "/auth/login",
-  authRegister: "/auth/register",
+  login: "/auth/login",
+  register: "/auth/register",
   tps: "/tps",
+  collection: "/collection",
 };
