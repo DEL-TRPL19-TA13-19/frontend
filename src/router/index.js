@@ -19,6 +19,21 @@ const routes = [
     path: "/collections",
     name: "collection",
     component: () => import("@/pages/Collections.vue")
+  },
+  {
+    path: "/alternatives",
+    name: "alternative",
+    component: () => import("@/pages/Alternatives.vue")
+  },
+  {
+    path: "/alternatives/add",
+    name: "addAlternative",
+    component: () => import("@/pages/AddAlternative.vue")
+  },
+  {
+    path: "/alternatives/edit",
+    name: "editAlternative",
+    component: () => import("@/pages/EditAlternative.vue")
   }
 ];
 

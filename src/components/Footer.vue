@@ -16,10 +16,13 @@ footer {
     width: 100%;
     height: 50px;
     display: flex;
+    padding: 15px 50px 15px 50px;
+    justify-content: space-between;
     position: fixed;
     vertical-align: center;
-    justify-content: space-evenly;
     box-shadow: 20px 20px 50px grey;
+    background-color: white;
+
 }
 </style>
 <script setup>

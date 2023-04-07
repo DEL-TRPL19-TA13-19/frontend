@@ -11,7 +11,7 @@
           <b-nav-item href="/login">Login</b-nav-item>
             <b-nav-item href="/">Dashboard</b-nav-item>
             <b-nav-item href="/collections">Collections</b-nav-item>
-            <b-nav-item href="#">Alternatives</b-nav-item>
+            <b-nav-item href="/alternatives">Alternatives</b-nav-item>
             <b-nav-item href="#">Penilaian</b-nav-item>
             <b-nav-item href="#">Perhitungan</b-nav-item>
             <b-nav-item href="#">Hasil Akhir</b-nav-item>
