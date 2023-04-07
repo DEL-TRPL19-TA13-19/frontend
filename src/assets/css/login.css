@@ -1,0 +1,31 @@
+.login-container{
+    width: 35%;
+    border: 3px solid #15AC65;
+    padding: 3% 5% 3% 5%;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.login-container * {
+    padding: 5px 10px;
+}
+
+.login-label{
+    text-align: center;
+}
+
+.dlh-image{
+    width: 20%;
+    height: 20%;
+}
+
+.login-button{
+    border: #19A4E0;
+    background-color: #19A4E0;
+    align-self: center;
+}
+
+.login-button:hover{
+    border: #2596be;
+    background-color: #2596be;
+}
