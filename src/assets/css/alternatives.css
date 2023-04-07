@@ -1,0 +1,85 @@
+.title {
+  margin: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-title {
+  margin: 40px;
+  display: flex;
+  justify-content: start;
+  gap: 80px;
+}
+
+.form-action {
+  margin: 40px;
+  display: flex;
+  justify-content: end;
+  gap: 30px;
+}
+
+.add-button {
+  padding: 10px;
+  border: 1px solid #067FCB;
+  background-color: #067FCB;
+}
+
+.cancel-button {
+  padding: 10px;
+}
+
+.add-button:hover {
+  padding: 10px;
+  border: 1px solid #06629c;
+  background-color: #06629c;
+}
+
+.table-card {
+  margin-top: 5%;
+  border: 1px solid lightgrey;
+}
+
+.table-card-title {
+  padding: 30px 20px 20px 20px;
+  background-color: #D9F4E7;
+  vertical-align: baseline;
+  display: flex;
+  column-gap: 20px;
+  color: #0A7341;
+  font-size: 20px;
+}
+
+.table-card-body {
+  margin: 30px;
+}
+
+.table-customize {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 50px 0px 50px;
+}
+
+.table-utils {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.select-data-entries {
+  height: 30px;
+  width: 65px;
+}
+
+b-pagination > li > a {
+  background-color: #067FCB !important;
+}
+
+b-pagination > li.active > a {
+  background-color: #067FCB !important;
+}
+
+b-pagination > li > a:hover {
+  background-color: #06629c !important;
+}
+
+/*# sourceMappingURL=alternatives.css.map */
