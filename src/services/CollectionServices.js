@@ -13,6 +13,14 @@ class CollectionServices {
   create(payload) {
     return api.post(endpoint.collection, payload);
   }
+
+  update(payload) {
+    return api.patch(endpoint.collection, payload);
+  }
+
+  delete(id) {
+    return api.delete(endpoint.collection + `/${id}`);
+  }
 }
 
 export default new CollectionServices();
