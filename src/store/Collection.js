@@ -1,12 +1,5 @@
 import { defineStore, mapState } from "pinia";
-import {
-  computed,
-  effect,
-  ref,
-  watch,
-  watchEffect,
-  watchPostEffect,
-} from "vue";
+import { computed, ref } from "vue";
 import CollectionServices from "@/services/CollectionServices";
 export const useCollectionStore = defineStore("store", () => {
   const collections = ref([]);
