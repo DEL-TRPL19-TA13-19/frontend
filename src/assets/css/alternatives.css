@@ -8,7 +8,7 @@
   margin: 40px;
   display: flex;
   justify-content: start;
-  gap: 80px;
+  gap: 50px;
 }
 
 .form-action {
@@ -19,6 +19,7 @@
 }
 
 .add-button {
+  color: white;
   padding: 10px;
   border: 1px solid #067FCB;
   background-color: #067FCB;
@@ -34,8 +35,14 @@
   background-color: #06629c;
 }
 
+.add-button:active {
+  padding: 10px;
+  border: 1px solid #064f7d !important;
+  background-color: #064f7d !important;
+}
+
 .table-card {
-  margin-top: 5%;
+  margin: 3% 1% auto 1%;
   border: 1px solid lightgrey;
 }
 

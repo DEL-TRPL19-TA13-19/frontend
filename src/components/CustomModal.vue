@@ -25,7 +25,7 @@
           <slot name="footer"></slot>
           <button
             type="button"
-            class="btn btn-secondary"
+            class="btn btn-secondary cancel-button"
             data-bs-dismiss="modal"
           >
             Close
