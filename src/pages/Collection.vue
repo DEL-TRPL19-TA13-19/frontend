@@ -1,5 +1,5 @@
 <template>
-    <b-container>
+    <b-container fluid>
         <div class="text-center">
             <Loading v-if="store.loading" />
         </div>
@@ -88,7 +88,7 @@
             </b-form>
         </template>
         <template v-slot:footer
-        ><b-button variant="primary" @click="handlerForm()" v-if="isFormAdd"
+        ><b-button class="add-button" variant="primary" @click="handlerForm()" v-if="isFormAdd"
         >Tambah </b-button
         ><b-button variant="primary" @click="handlerForm()" v-if="!isFormAdd"
         >Edit

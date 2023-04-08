@@ -1,5 +1,5 @@
 <template>
-    <b-container>
+    <b-container fluid>
         <div class="title">
             <div>
                 <h3><span><font-awesome-icon class="icon" icon="fa-solid fa-users" />&nbsp;</span>A l t e r n a t i v e s</h3>
