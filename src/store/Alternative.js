@@ -24,12 +24,14 @@ export const useAlternativeStore = defineStore("alternativeStore", () => {
     { key: "actions" },
   ];
 
-  const fetchAlternatives = async () => {
+  const fetchAlternatives = async (id) => {
     alternatives.value = [];
     loading.value = true;
 
     try {
-      alternatives.value = (await AlternativeServices.getAll()).data.data;
+      alternatives.value = (
+        await AlternativeServices.getByCollectionID(id)
+      ).data.data;
     } catch (err) {
       err.value = err.data;
     } finally {

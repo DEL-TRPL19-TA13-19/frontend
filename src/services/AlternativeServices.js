@@ -6,6 +6,10 @@ class AlternativeServices {
     return api.get(`${endpoint.alternative}`);
   }
 
+  getByCollectionID(id) {
+    return api.get(`${endpoint.alternative}/collection/${id}`);
+  }
+
   getByID(id) {
     return api.get(`${endpoint.alternative}/${id}`);
   }
