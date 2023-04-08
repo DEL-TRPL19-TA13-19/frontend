@@ -1,93 +1,103 @@
 <template>
-  <div class="text-center">
-    <Loading v-if="store.loading" />
-  </div>
-  <b-container v-if="!store.loading">
-    <div class="title">
-      <div>
-        <h3>
-          <span
-            ><font-awesome-icon
-              class="icon"
-              icon="fa-solid fa-users"
-            />&nbsp;</span
-          >A l t e r n a t i v e s
-        </h3>
-      </div>
-      <div>
-        <b-button class="add-button" @click="showModal()" variant="primary">
-          <span><font-awesome-icon icon="fa-solid fa-plus" />&nbsp;</span>
-          Tambah Data
-        </b-button>
-      </div>
-    </div>
-    <hr />
-    <div class="table-card">
-      <div class="table-card-title">
-        <h5><font-awesome-icon icon="fa-solid fa-table" /></h5>
-        <h5>A l t e r n a t i v e s</h5>
-      </div>
-      <div class="table-card-body">
-        <div class="table-customize">
-          <b-row class="select-data-entries">
-            <!--            <b-form-select size="sm" class="mt-3"></b-form-select>-->
-          </b-row>
-          <b-row class="w-50 p-3 mb-1">
-            <b-form-input
-              placeholder="Search..."
-              size="sm"
-              class="text-center mx-auto search"
-              v-model="search"
-              @input="store.searchTables(search)"
-            ></b-form-input>
-          </b-row>
+  <b-container fluid class="pt-4">
+    <b-row
+      ><b-col>
+        <h5 class="mb-5">Pilih collection :</h5>
+        <div v-for="collection in collectionStore.getTables">
+          <b-card
+            class="shadow mb-4"
+            @click="collectionStore.selectingTablesData(collection)"
+          >
+            <b-card-body class="text-center border-0 mt-4 mb-4">{{
+              collection.nama
+            }}</b-card-body>
+          </b-card>
         </div>
-        <b-table
-          striped
-          hover
-          caption-top
-          class="shadow-sm border"
-          :fields="store.getFieldsTables"
-          :items="search.length === 0 ? store.getTables : store.getSearchTables"
-        >
-          <template v-slot:cell(actions)="row">
+      </b-col>
+      <b-col cols="9">
+        <div class="title">
+          <div>
+            <h4>
+              <span
+                ><font-awesome-icon
+                  class="icon"
+                  icon="fa-solid fa-users"
+                />&nbsp;</span
+              >A l t e r n a t i v e s
+            </h4>
+          </div>
+          <div>
             <b-button
+              class="add-button"
+              @click="showModal()"
               variant="primary"
-              class="me-3"
-              @click="
-                store.selectingTablesData(row.item);
-                showModal();
+              :disabled="!canClickAdd"
+            >
+              <span><font-awesome-icon icon="fa-solid fa-plus" />&nbsp;</span>
+              Tambah Data
+            </b-button>
+          </div>
+        </div>
+        <hr />
+        <div class="table-card">
+          <div class="table-card-title">
+            <h5><font-awesome-icon icon="fa-solid fa-table" /></h5>
+            <h5>A l t e r n a t i v e s</h5>
+          </div>
+          <div class="table-card-body">
+            <div class="text-center">
+              <Loading v-if="alternativeStore.loading" />
+            </div>
+            <div class="table-customize">
+              <b-row class="select-data-entries">
+                <!--            <b-form-select size="sm" class="mt-3"></b-form-select>-->
+              </b-row>
+              <b-row class="w-50 p-3 mb-1">
+                <b-form-input
+                  placeholder="Search..."
+                  size="sm"
+                  class="text-center mx-auto search"
+                  v-model="search"
+                  @input="alternativeStore.searchTables(search)"
+                ></b-form-input>
+              </b-row>
+            </div>
+            <b-table
+              v-if="!alternativeStore.loading"
+              striped
+              hover
+              caption-top
+              class="shadow-sm border"
+              :fields="alternativeStore.getFieldsTables"
+              :items="
+                search.length === 0
+                  ? alternativeStore.getTables
+                  : alternativeStore.getSearchTables
               "
             >
-              Edit
-            </b-button>
-            <b-button
-              variant="danger"
-              @click="store.deleteAlternative(row.item.id)"
-            >
-              Delete
-            </b-button>
-          </template>
-        </b-table>
-      </div>
-    </div>
-    <!--    <div class="table-utils">-->
-    <!--      <div>-->
-    <!--        <p>Showing {{ currentPage }} to 5 of 5 entries</p>-->
-    <!--      </div>-->
-    <!--      <div>-->
-    <!--        <b-pagination-->
-    <!--          v-model="currentPage"-->
-    <!--          :total-rows="rows"-->
-    <!--          :per-page="perPage"-->
-    <!--          aria-controls="my-table"-->
-    <!--          prev-text="Previous"-->
-    <!--          next-text="Next"-->
-    <!--          first-number-->
-    <!--          last-number-->
-    <!--        ></b-pagination>-->
-    <!--      </div>-->
-    <!--    </div>-->
+              <template v-slot:cell(actions)="row">
+                <b-button
+                  variant="primary"
+                  class="me-3"
+                  @click="
+                    alternativeStore.selectingTablesData(row.item);
+                    showModal();
+                  "
+                >
+                  Edit
+                </b-button>
+                <b-button
+                  variant="danger"
+                  @click="alternativeStore.deleteAlternative(row.item.id)"
+                >
+                  Delete
+                </b-button>
+              </template>
+            </b-table>
+          </div>
+        </div>
+      </b-col>
+    </b-row>
   </b-container>
   <CustomModal title="Alternative" ref="alternativeModal">
     <template v-slot:body>
@@ -215,7 +225,6 @@
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { useAlternativeStore } from "@/store/Alternative";
 import { onMounted, ref, watch } from "vue";
-import { useRoute } from "vue-router";
 import CustomModal from "@/components/CustomModal.vue";
 import { sanitize } from "@/utils/constant";
 import {
@@ -229,11 +238,11 @@ import {
   optionTimbulanSampah,
 } from "@/utils/options";
 import Loading from "@/components/Loading.vue";
+import { useCollectionStore } from "@/store/Collection";
 
-const store = useAlternativeStore();
+const alternativeStore = useAlternativeStore();
 
-const route = useRoute();
-const idCollection = route.params.id;
+const collectionStore = useCollectionStore();
 
 let search = ref("");
 
@@ -249,13 +258,14 @@ let jarakTpa = ref("");
 let kondisiTanah = ref("");
 let partisipasiMasyarakat = ref("");
 let isFormAdd = ref(true);
+let canClickAdd = ref(false);
 
 const handlerForm = () => {
   if (isFormAdd.value) {
     let payload = {
       aksesibilitas: sanitize(aksesibilitas.value),
       cakupan_rumah: sanitize(cakupanRumah.value),
-      collection_id: idCollection,
+      collection_id: collectionStore.getSelectedTables.value.id,
       jarak_pemukiman: sanitize(jarakPemukiman.value),
       jarak_sungai: sanitize(jarakSungai.value),
       jarak_tpa: sanitize(jarakTpa.value),
@@ -264,12 +274,12 @@ const handlerForm = () => {
       partisipasi_masyarakat: sanitize(partisipasiMasyarakat.value),
       timbulan_sampah: sanitize(timbulanSampah.value),
     };
-    store.addAlternative(payload);
+    alternativeStore.addAlternative(payload);
   } else {
     let payload = {
       aksesibilitas: sanitize(aksesibilitas.value),
       cakupan_rumah: sanitize(cakupanRumah.value),
-      id: store.getSelectedTables.value.id,
+      id: alternativeStore.getSelectedTables.value.id,
       jarak_pemukiman: sanitize(jarakPemukiman.value),
       jarak_sungai: sanitize(jarakSungai.value),
       jarak_tpa: sanitize(jarakTpa.value),
@@ -278,7 +288,7 @@ const handlerForm = () => {
       partisipasi_masyarakat: sanitize(partisipasiMasyarakat.value),
       timbulan_sampah: sanitize(timbulanSampah.value),
     };
-    store.updateAlternative(payload);
+    alternativeStore.updateAlternative(payload);
   }
   hideModal();
   isFormAdd.value = true;
@@ -301,7 +311,7 @@ const hideModal = () => {
   alternativeModal.value.hide();
 };
 
-watch(store.getSelectedTables, (e) => {
+watch(alternativeStore.getSelectedTables, (e) => {
   isFormAdd.value = false;
   nama.value = e.nama;
   timbulanSampah.value = e.timbulan_sampah;
@@ -314,9 +324,17 @@ watch(store.getSelectedTables, (e) => {
   partisipasiMasyarakat.value = e.partisipasi_masyarakat;
 });
 
+watch(collectionStore.getSelectedTables, (e) => {
+  canClickAdd.value = true;
+
+  alternativeStore.fetchAlternatives(e.id).then(() => {
+    alternativeStore.setTables();
+  });
+});
+
 onMounted(() => {
-  store.fetchAlternatives(idCollection).then(() => {
-    store.setTables();
+  collectionStore.fetchCollections().then(() => {
+    collectionStore.setTables();
   });
 });
 </script>

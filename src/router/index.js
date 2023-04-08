@@ -21,7 +21,7 @@ const routes = [
     component: () => import("@/pages/Collection.vue"),
   },
   {
-    path: "/collections/:id/alternatives",
+    path: "/alternatives",
     name: "alternatives",
     component: () => import("@/pages/Alternatives.vue"),
   },

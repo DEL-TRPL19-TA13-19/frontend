@@ -60,17 +60,6 @@
             class="shadow-sm border"
           >
             <template v-slot:cell(actions)="row">
-              <router-link
-                :to="{ name: 'alternatives', params: { id: row.item.id } }"
-              >
-                <b-button
-                  variant="success"
-                  class="me-3"
-                  @click="store.selectingTablesData(row.item)"
-                >
-                  Alternatives
-                </b-button>
-              </router-link>
               <b-button
                 variant="primary"
                 class="me-3"
