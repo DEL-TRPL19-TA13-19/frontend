@@ -35,6 +35,11 @@ const routes = [
     name: "editAlternative",
     component: () => import("@/pages/EditAlternative.vue"),
   },
+  {
+    path: "/criteria",
+    name: "criteria",
+    component: () => import("@/pages/Criteria.vue"),
+  },
 ];
 
 const router = createRouter({ routes, history: createWebHistory() });
