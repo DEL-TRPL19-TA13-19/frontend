@@ -7,7 +7,7 @@
         <Navbar v-if="!$route.meta.hideNavbar"/>
         <v-main>
             <router-view/>
-            <Footer/>
+            <Footer v-if="!$route.meta.hideNavbar"/>
         </v-main>
     </v-layout>
 </template>

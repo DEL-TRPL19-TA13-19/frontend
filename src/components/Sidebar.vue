@@ -17,13 +17,17 @@
                 <v-icon id="icon" icon="fas fa-cubes"></v-icon>
                 Collection
             </v-list-item>
-            <v-list-item id="list-item" to="/alternatives" prepend-icon="mdi-forum" value="collections">
+            <v-list-item id="list-item" to="/alternatives" prepend-icon="mdi-forum" value="alternatives">
                 <v-icon id="icon" icon="fas fa-users"></v-icon>
                 Alternative
             </v-list-item>
-            <v-list-item id="list-item" to="/criteria" prepend-icon="mdi-forum" value="collections">
+            <v-list-item id="list-item" to="/criteria" prepend-icon="mdi-forum" value="criterias">
                 <v-icon id="icon" icon="fas fa-box"></v-icon>
                 Criteria
+            </v-list-item>
+            <v-list-item id="list-item" to="/sub-criteria" prepend-icon="mdi-forum" value="subCriterias">
+                <v-icon id="icon" icon="fas fa-cubes"></v-icon>
+                Sub Criteria
             </v-list-item>
         </v-list>
     </v-navigation-drawer>

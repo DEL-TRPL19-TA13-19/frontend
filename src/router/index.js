@@ -40,6 +40,11 @@ const routes = [
     name: "criteria",
     component: () => import("@/pages/Criteria.vue"),
   },
+  {
+    path: "/sub-criteria",
+    name: "subCriteria",
+    component: () => import("@/pages/SubCriteria.vue"),
+  },
 ];
 
 const router = createRouter({ routes, history: createWebHistory() });
