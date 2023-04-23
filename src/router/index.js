@@ -45,6 +45,11 @@ const routes = [
     name: "subCriteria",
     component: () => import("@/pages/SubCriteria.vue"),
   },
+  {
+    path: "/perhitungan",
+    name: "calculation",
+    component: () => import("@/pages/Calculation.vue"),
+  },
 ];
 
 const router = createRouter({ routes, history: createWebHistory() });

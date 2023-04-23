@@ -29,6 +29,10 @@
                 <v-icon id="icon" icon="fas fa-cubes"></v-icon>
                 Sub Criteria
             </v-list-item>
+            <v-list-item id="list-item" to="/perhitungan" prepend-icon="mdi-forum" value="calculation">
+                <v-icon id="icon" icon="fas fa-calculator"></v-icon>
+                Perhitungan
+            </v-list-item>
         </v-list>
     </v-navigation-drawer>
 </template>
