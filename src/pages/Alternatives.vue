@@ -6,7 +6,7 @@
             </div>
             <div>
                 <a href="/alternatives/add">
-                    <b-button class="add-button" variant="primary">
+                    <b-button class="custom-button" variant="primary">
                         <span><font-awesome-icon icon="fa-solid fa-plus" />&nbsp;</span> Tambah Data
                     </b-button>
                 </a>

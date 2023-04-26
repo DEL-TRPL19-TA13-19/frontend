@@ -33,6 +33,16 @@
                 <v-icon id="icon" icon="fas fa-calculator"></v-icon>
                 Perhitungan
             </v-list-item>
+            <v-list-item id="list-item" to="/result" prepend-icon="mdi-forum" value="result">
+                <v-icon id="icon" icon="fas fa-ranking-star"></v-icon>
+                Data Hasil Akhir
+            </v-list-item>
+            <p>Master Data</p>
+            <hr>
+            <v-list-item id="list-item" to="/users" prepend-icon="mdi-forum" value="users">
+                <v-icon id="icon" icon="fas fa-users"></v-icon>
+                User
+            </v-list-item>
         </v-list>
     </v-navigation-drawer>
 </template>

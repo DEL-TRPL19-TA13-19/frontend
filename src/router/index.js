@@ -50,6 +50,16 @@ const routes = [
     name: "calculation",
     component: () => import("@/pages/Calculation.vue"),
   },
+  {
+    path: "/result",
+    name: "result",
+    component: () => import("@/pages/Result.vue"),
+  },
+  {
+    path: "/users",
+    name: "users",
+    component: () => import("@/pages/Users.vue"),
+  },
 ];
 
 const router = createRouter({ routes, history: createWebHistory() });
