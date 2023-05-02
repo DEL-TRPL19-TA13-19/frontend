@@ -9,8 +9,6 @@
       </div>
       <hr />
       <welcome></welcome>
-      <!--  <h1>{{ loading ? "Yes" : "No" }}</h1>-->
-      <!--  <button @click="login">Test</button>-->
       <b-card-group columns class="dashboard-card-deck">
         <b-card class="dashboard-card card-yellow" href="/login">
           <b-row align-v="center">
