@@ -1,0 +1,62 @@
+#criteria-card{
+  margin: 30px 30px auto 30px;
+}
+
+#criteria-card-title{
+  padding: 20px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: start;
+  gap: 10px;
+  background-color: #D9F4E7;
+}
+
+#criteria-card-table{
+  border: 1px solid lightgrey;
+  padding: 60px;
+}
+
+#th {
+  text-wrap: normal;
+  min-width: 100px;
+  width: 150px;
+  max-width: 150px;
+  border: 1px solid lightgrey;
+  padding: 20px;
+  background-color: #15AC65;
+  color: white;
+}
+
+#criteria-select{
+  max-width: 80px!important;
+
+}
+
+#pairwise{
+  justify-content: center;
+  width: 80px!important;
+}
+
+#select-container{
+  justify-content: center;
+  text-align: center;
+}
+
+.add-button{
+  color: white;
+  padding: 10px;
+  border: 1px solid #067FCB;
+  background-color: #067FCB;
+}
+
+.add-button:hover{
+  padding: 10px;
+  border: 1px solid #06629c;
+  background-color: #06629c;
+}
+
+.add-button:active{
+  padding: 10px;
+  border: 1px solid #064f7d!important;
+  background-color: #064f7d!important;
+}
