@@ -73,8 +73,8 @@ export const optionJarakPemukiman = [
     disabled: true,
   },
   {
-    value: "0-100m",
-    text: "0-100m",
+    value: "0m-100m",
+    text: "0m-100m",
   },
   {
     value: "101m-200m",

@@ -68,13 +68,25 @@
                   showModal();
                 "
               >
-                Edit
+                <span
+                  ><font-awesome-icon
+                    class="text-white"
+                    style="font-size: 12px"
+                    icon="fa-solid fa-pen"
+                  />&nbsp;</span
+                >
               </b-button>
               <b-button
                 variant="danger"
                 @click="store.deleteCollection(row.item.id)"
               >
-                Delete
+                <span
+                  ><font-awesome-icon
+                    class="text-white"
+                    style="font-size: 12px"
+                    icon="fa-solid fa-trash"
+                  />&nbsp;</span
+                >
               </b-button>
             </template>
           </b-table>

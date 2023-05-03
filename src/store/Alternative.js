@@ -18,7 +18,6 @@ export const useAlternativeStore = defineStore("alternativeStore", () => {
     { key: "jarak_pemukiman", sortable: true },
     { key: "jarak_sungai", sortable: true },
     { key: "jarak_tpa", sortable: true },
-    { key: "kondisi_tanah", sortable: true },
     { key: "partisipasi_masyarakat", sortable: true },
     { key: "timbulan_sampah", sortable: true },
     { key: "actions" },

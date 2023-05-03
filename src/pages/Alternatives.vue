@@ -1,11 +1,15 @@
 <template>
   <b-container fluid class="pt-4">
     <b-row
-      ><b-col>
+      ><b-col
+        class="text-center"
+        style="overflow-y: scroll; display: block; height: 100vh"
+      >
         <h5 class="mb-5">Pilih collection :</h5>
         <div v-for="collection in collectionStore.getTables">
           <b-card
-            class="shadow mb-4"
+            style="width: 15vw"
+            class="shadow mb-4 mx-auto"
             @click="collectionStore.selectingTablesData(collection)"
           >
             <b-card-body class="text-center border-0 mt-4 mb-4">{{
@@ -29,7 +33,10 @@
           <div>
             <b-button
               class="add-button"
-              @click="showModal()"
+              @click="
+                showModal();
+                cleanForm();
+              "
               variant="primary"
               :disabled="!canClickAdd"
             >
@@ -49,10 +56,7 @@
               <Loading v-if="alternativeStore.loading" />
             </div>
             <div class="table-customize">
-              <b-row class="select-data-entries">
-                <!--            <b-form-select size="sm" class="mt-3"></b-form-select>-->
-              </b-row>
-              <b-row class="w-50 p-3 mb-1">
+              <b-col class="p-3 mb-1">
                 <b-form-input
                   placeholder="Search..."
                   size="sm"
@@ -60,37 +64,56 @@
                   v-model="search"
                   @input="alternativeStore.searchTables(search)"
                 ></b-form-input>
-              </b-row>
+              </b-col>
             </div>
             <b-table
               v-if="!alternativeStore.loading"
               striped
               hover
               caption-top
-              class="shadow-sm border"
+              class="shadow-sm border mx-auto"
               :fields="alternativeStore.getFieldsTables"
               :items="
                 search.length === 0
                   ? alternativeStore.getTables
                   : alternativeStore.getSearchTables
               "
+              style="
+                overflow-y: scroll;
+                width: 53vw;
+                height: 50vh;
+                display: block;
+                font-size: 14px;
+              "
             >
               <template v-slot:cell(actions)="row">
                 <b-button
                   variant="primary"
-                  class="me-3"
+                  class="me-3 mb-2"
                   @click="
                     alternativeStore.selectingTablesData(row.item);
                     showModal();
                   "
                 >
-                  Edit
+                  <span
+                    ><font-awesome-icon
+                      class="text-white"
+                      style="font-size: 12px"
+                      icon="fa-solid fa-pen"
+                    />&nbsp;</span
+                  >
                 </b-button>
                 <b-button
                   variant="danger"
                   @click="alternativeStore.deleteAlternative(row.item.id)"
                 >
-                  Delete
+                  <span
+                    ><font-awesome-icon
+                      class="text-white"
+                      style="font-size: 12px"
+                      icon="fa-solid fa-trash"
+                    />&nbsp;</span
+                  >
                 </b-button>
               </template>
             </b-table>
@@ -133,18 +156,6 @@
             id="input-jaraktpa"
             v-model="jarakTpa"
             :options="optionJarakTPA"
-            size="sm"
-            class="mt-3"
-          ></b-form-select>
-        </b-form-group>
-        <b-form-group
-          id="input-group-kondisitanah"
-          label="Kondisi tanah"
-          label-for="input-kondisi tanah"
-          ><b-form-select
-            id="input-kondisitanah"
-            v-model="kondisiTanah"
-            :options="optionKondisiTanah"
             size="sm"
             class="mt-3"
           ></b-form-select>
@@ -248,6 +259,7 @@ let search = ref("");
 
 let alternativeModal = ref(null);
 
+let formRef = ref("");
 let nama = ref("");
 let timbulanSampah = ref("");
 let aksesibilitas = ref("");
@@ -263,34 +275,62 @@ let canClickAdd = ref(false);
 const handlerForm = () => {
   if (isFormAdd.value) {
     let payload = {
-      aksesibilitas: sanitize(aksesibilitas.value),
-      cakupan_rumah: sanitize(cakupanRumah.value),
+      // aksesibilitas: sanitize(aksesibilitas.value),
+      // cakupan_rumah: sanitize(cakupanRumah.value),
+      // collection_id: collectionStore.getSelectedTables.value.id,
+      // jarak_pemukiman: sanitize(jarakPemukiman.value),
+      // jarak_sungai: sanitize(jarakSungai.value),
+      // jarak_tpa: sanitize(jarakTpa.value),
+      // nama: sanitize(nama.value),
+      // partisipasi_masyarakat: sanitize(partisipasiMasyarakat.value),
+      // timbulan_sampah: sanitize(timbulanSampah.value),
       collection_id: collectionStore.getSelectedTables.value.id,
-      jarak_pemukiman: sanitize(jarakPemukiman.value),
-      jarak_sungai: sanitize(jarakSungai.value),
-      jarak_tpa: sanitize(jarakTpa.value),
-      kondisi_tanah: sanitize(kondisiTanah.value),
-      nama: sanitize(nama.value),
-      partisipasi_masyarakat: sanitize(partisipasiMasyarakat.value),
-      timbulan_sampah: sanitize(timbulanSampah.value),
+      aksesibilitas: aksesibilitas.value,
+      cakupan_rumah: cakupanRumah.value,
+      jarak_pemukiman: jarakPemukiman.value,
+      jarak_sungai: jarakSungai.value,
+      jarak_tpa: jarakTpa.value,
+      nama: nama.value,
+      partisipasi_masyarakat: partisipasiMasyarakat.value,
+      timbulan_sampah: timbulanSampah.value,
     };
     alternativeStore.addAlternative(payload);
   } else {
     let payload = {
-      aksesibilitas: sanitize(aksesibilitas.value),
-      cakupan_rumah: sanitize(cakupanRumah.value),
+      // aksesibilitas: sanitize(aksesibilitas.value),
+      // cakupan_rumah: sanitize(cakupanRumah.value),
+      // id: alternativeStore.getSelectedTables.value.id,
+      // jarak_pemukiman: sanitize(jarakPemukiman.value),
+      // jarak_sungai: sanitize(jarakSungai.value),
+      // jarak_tpa: sanitize(jarakTpa.value),
+      // nama: sanitize(nama.value),
+      // partisipasi_masyarakat: sanitize(partisipasiMasyarakat.value),
+      // timbulan_sampah: sanitize(timbulanSampah.value),
+      aksesibilitas: aksesibilitas.value,
+      cakupan_rumah: cakupanRumah.value,
       id: alternativeStore.getSelectedTables.value.id,
-      jarak_pemukiman: sanitize(jarakPemukiman.value),
-      jarak_sungai: sanitize(jarakSungai.value),
-      jarak_tpa: sanitize(jarakTpa.value),
-      kondisi_tanah: sanitize(kondisiTanah.value),
-      nama: sanitize(nama.value),
-      partisipasi_masyarakat: sanitize(partisipasiMasyarakat.value),
-      timbulan_sampah: sanitize(timbulanSampah.value),
+      jarak_pemukiman: jarakPemukiman.value,
+      jarak_sungai: jarakSungai.value,
+      jarak_tpa: jarakTpa.value,
+      nama: nama.value,
+      partisipasi_masyarakat: partisipasiMasyarakat.value,
+      timbulan_sampah: timbulanSampah.value,
     };
     alternativeStore.updateAlternative(payload);
   }
   hideModal();
+  cleanForm();
+};
+
+const showModal = () => {
+  alternativeModal.value.show();
+};
+
+const hideModal = () => {
+  alternativeModal.value.hide();
+};
+
+const cleanForm = () => {
   isFormAdd.value = true;
   nama.value = "";
   timbulanSampah.value = "";
@@ -301,14 +341,6 @@ const handlerForm = () => {
   jarakTpa.value = "";
   kondisiTanah.value = "";
   partisipasiMasyarakat.value = "";
-};
-
-const showModal = () => {
-  alternativeModal.value.show();
-};
-
-const hideModal = () => {
-  alternativeModal.value.hide();
 };
 
 watch(alternativeStore.getSelectedTables, (e) => {
