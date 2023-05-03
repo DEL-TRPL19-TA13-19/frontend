@@ -1,0 +1,76 @@
+.title {
+  margin: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.content {
+  padding-bottom: 50px;
+}
+
+.custom-card {
+  border: 0px solid black;
+  margin: 50px 20px 50px 20px;
+}
+
+.card-title {
+  padding: 20px 20px 15px 20px;
+  background-color: #D9F4E7;
+  color: #0A7341;
+}
+
+.card-body {
+  padding: 30px 40px 30px 40px;
+  margin-top: 0px;
+  border: 1px solid #C5C5C5;
+}
+
+.table-customize {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 50px 0px 50px;
+}
+
+.table-utils {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.select-data-entries {
+  height: 30px;
+  width: 65px;
+}
+
+b-pagination > li > a {
+  background-color: #067FCB !important;
+}
+
+b-pagination > li.active > a {
+  background-color: #067FCB !important;
+}
+
+b-pagination > li > a:hover {
+  background-color: #06629c !important;
+}
+
+.custom-button {
+  color: white;
+  padding: 10px;
+  border: 1px solid #067FCB;
+  background-color: #067FCB;
+}
+
+.custom-button:hover {
+  padding: 10px;
+  border: 1px solid #06629c;
+  background-color: #06629c;
+}
+
+.custom-button:active {
+  padding: 10px;
+  border: 1px solid #064f7d !important;
+  background-color: #064f7d !important;
+}
+
+/*# sourceMappingURL=app.css.map */

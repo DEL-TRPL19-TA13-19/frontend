@@ -22,18 +22,8 @@ const routes = [
   },
   {
     path: "/alternatives",
-    name: "alternative",
+    name: "alternatives",
     component: () => import("@/pages/Alternatives.vue"),
-  },
-  {
-    path: "/alternatives/add",
-    name: "addAlternative",
-    component: () => import("@/pages/AddAlternative.vue"),
-  },
-  {
-    path: "/alternatives/edit",
-    name: "editAlternative",
-    component: () => import("@/pages/EditAlternative.vue"),
   },
 ];
 

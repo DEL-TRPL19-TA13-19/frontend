@@ -11,7 +11,7 @@
       <h5 class="login-label">Dinas Lingkungan Hidup</h5>
       <hr />
       <h1 class="login-label">LOGIN</h1>
-      <router-link to="/">Dashboard</router-link>
+<!--      <router-link to="/">Dashboard</router-link>-->
       <b-form>
         <b-form-group
           id="input-group-username"

@@ -1,5 +1,4 @@
 .title {
-  margin: 40px;
   display: flex;
   justify-content: space-between;
 }
@@ -8,7 +7,7 @@
   margin: 40px;
   display: flex;
   justify-content: start;
-  gap: 80px;
+  gap: 50px;
 }
 
 .form-action {
@@ -18,24 +17,31 @@
   gap: 30px;
 }
 
-.add-button {
+.custom-button {
+  color: white;
   padding: 10px;
   border: 1px solid #067FCB;
   background-color: #067FCB;
+}
+
+.custom-button:hover {
+  padding: 10px;
+  border: 1px solid #06629c;
+  background-color: #06629c;
+}
+
+.custom-button:active {
+  padding: 10px;
+  border: 1px solid #064f7d !important;
+  background-color: #064f7d !important;
 }
 
 .cancel-button {
   padding: 10px;
 }
 
-.add-button:hover {
-  padding: 10px;
-  border: 1px solid #06629c;
-  background-color: #06629c;
-}
-
 .table-card {
-  margin-top: 5%;
+  margin: 3% 1% auto 1%;
   border: 1px solid lightgrey;
 }
 

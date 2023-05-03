@@ -7,7 +7,7 @@
     aria-hidden="true"
     ref="modalRef"
   >
-    <div class="modal-dialog">
+    <div class="modal-dialog" :style="style">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">{{ title }}</h5>
@@ -25,7 +25,7 @@
           <slot name="footer"></slot>
           <button
             type="button"
-            class="btn btn-secondary"
+            class="btn btn-secondary cancel-button"
             data-bs-dismiss="modal"
           >
             Close
@@ -42,6 +42,7 @@ import { Modal } from "bootstrap";
 
 defineProps({
   title: String,
+  style: String,
 });
 
 let modalRef = ref(null);

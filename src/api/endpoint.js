@@ -3,4 +3,5 @@ export const endpoint = {
   register: "/auth/register",
   tps: "/tps",
   collection: "/collection",
+  alternative: "/alternative",
 };

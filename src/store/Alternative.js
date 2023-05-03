@@ -1,8 +1,9 @@
-import { defineStore, mapState } from "pinia";
+import { defineStore } from "pinia";
 import { computed, ref } from "vue";
-import CollectionServices from "@/services/CollectionServices";
-export const useCollectionStore = defineStore("collectionStore", () => {
-  const collections = ref([]);
+import AlternativeServices from "@/services/AlternativeServices";
+
+export const useAlternativeStore = defineStore("alternativeStore", () => {
+  const alternatives = ref([]);
   const tablesData = ref([]);
   const tablesSearchData = ref([]);
   const tablesSelectedData = ref(null);
@@ -12,30 +13,38 @@ export const useCollectionStore = defineStore("collectionStore", () => {
   const tableFields = [
     { key: "id", thClass: "d-none", tdClass: "d-none" },
     { key: "nama", sortable: true },
-    { key: "deskripsi", sortable: true },
+    { key: "aksesibilitas", sortable: true },
+    { key: "cakupan_rumah", sortable: true },
+    { key: "jarak_pemukiman", sortable: true },
+    { key: "jarak_sungai", sortable: true },
+    { key: "jarak_tpa", sortable: true },
+    { key: "partisipasi_masyarakat", sortable: true },
+    { key: "timbulan_sampah", sortable: true },
     { key: "actions" },
   ];
 
-  const fetchCollections = async () => {
-    collections.value = [];
+  const fetchAlternatives = async (id) => {
+    alternatives.value = [];
     loading.value = true;
 
     try {
-      collections.value = (await CollectionServices.getAll()).data.data;
+      alternatives.value = (
+        await AlternativeServices.getByCollectionID(id)
+      ).data.data;
     } catch (err) {
       err.value = err.data;
     } finally {
       loading.value = false;
     }
 
-    tablesData.value = JSON.parse(JSON.stringify(collections.value));
+    tablesData.value = JSON.parse(JSON.stringify(alternatives.value));
   };
 
-  const addCollection = async (payload) => {
+  const addAlternative = async (payload) => {
     loading.value = true;
 
     try {
-      const response = await CollectionServices.create(payload);
+      const response = await AlternativeServices.create(payload);
       tablesData.value = [...tablesData.value, response.data.data];
     } catch (err) {
       err.value = err;
@@ -44,11 +53,11 @@ export const useCollectionStore = defineStore("collectionStore", () => {
     }
   };
 
-  const updateCollection = async (payload) => {
+  const updateAlternative = async (payload) => {
     loading.value = true;
 
     try {
-      const response = await CollectionServices.update(payload);
+      const response = await AlternativeServices.update(payload);
     } catch (err) {
       err.value = err;
     } finally {
@@ -58,10 +67,10 @@ export const useCollectionStore = defineStore("collectionStore", () => {
     tablesData.value[index] = payload;
   };
 
-  const deleteCollection = async (id) => {
+  const deleteAlternative = async (id) => {
     loading.value = true;
     try {
-      const response = await CollectionServices.delete(id);
+      const response = await AlternativeServices.delete(id);
     } catch (err) {
       err.value = err;
     } finally {
@@ -74,12 +83,9 @@ export const useCollectionStore = defineStore("collectionStore", () => {
     tablesData.value.forEach((el, i) => {
       delete el.modified_at;
       delete el.modified_by;
-      delete el.alternatives;
-      delete el.user_id;
       delete el.created_by;
       delete el.created_at;
       delete el.created_by;
-      delete el.is_calculated;
     });
   };
 
@@ -92,9 +98,6 @@ export const useCollectionStore = defineStore("collectionStore", () => {
       if (item.nama.toLowerCase().includes(input.toLowerCase())) {
         return item;
       }
-      if (item.deskripsi.toLowerCase().includes(input.toLowerCase())) {
-        return item;
-      }
     });
   };
 
@@ -103,10 +106,11 @@ export const useCollectionStore = defineStore("collectionStore", () => {
   };
 
   return {
-    fetchCollections,
-    addCollection,
-    deleteCollection,
-    updateCollection,
+    alternatives,
+    fetchAlternatives,
+    addAlternative,
+    deleteAlternative,
+    updateAlternative,
     setTables,
     getTables,
     getSearchTables,

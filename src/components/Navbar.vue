@@ -1,26 +1,13 @@
 <template>
-  <div>
-    <b-navbar toggleable="lg" type="dark" variant="info">
-      <b-navbar-brand to="/">Penentuan Lokasi TPS
-      </b-navbar-brand>
-
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav class="mx-auto">
-          <b-nav-item href="/login">Login</b-nav-item>
-            <b-nav-item href="/">Dashboard</b-nav-item>
-            <b-nav-item href="/collections">Collections</b-nav-item>
-            <b-nav-item href="/alternatives">Alternatives</b-nav-item>
-            <b-nav-item href="#">Penilaian</b-nav-item>
-            <b-nav-item href="#">Perhitungan</b-nav-item>
-            <b-nav-item href="#">Hasil Akhir</b-nav-item>
-            <b-nav-item href="#">User</b-nav-item>
-            <b-nav-item href="#">Profile</b-nav-item>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
-  </div>
+    <v-app-bar id="navbar" :elevation="2" :order="-1">
+        <v-app-bar-title style="display: flex; flex-direction: row">
+            <img src="src/assets/images/logo_nobg.png" alt="dlh" width="40" height="40">
+            SPK Metode AHP
+        </v-app-bar-title>
+    </v-app-bar>
 </template>
 <script setup>
 </script>
+<style lang="scss">
+@import "/src/assets/design/navbar";
+</style>
