@@ -1,5 +1,5 @@
 .title {
-  margin: 40px;
+  margin: 20px;
   display: flex;
   justify-content: space-between;
 }
@@ -39,7 +39,6 @@
 }
 
 .card-body {
-  padding: 30px 40px 30px 40px;
   margin-top: 0px;
   border: 1px solid #C5C5C5;
 }
