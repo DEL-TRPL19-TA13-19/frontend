@@ -91,6 +91,8 @@ export const useAlternativeStore = defineStore("alternativeStore", () => {
 
   const getTables = computed(() => tablesData.value);
   const getFieldsTables = computed(() => tableFields);
+  const getFieldsCalculateTables = computed(() => tableFieldsCalculate);
+
   const getSearchTables = computed(() => tablesSearchData.value);
   const getSelectedTables = computed(() => tablesSelectedData);
   const searchTables = (input) => {
@@ -115,6 +117,7 @@ export const useAlternativeStore = defineStore("alternativeStore", () => {
     getTables,
     getSearchTables,
     getFieldsTables,
+    getFieldsCalculateTables,
     searchTables,
     selectingTablesData,
     getSelectedTables,

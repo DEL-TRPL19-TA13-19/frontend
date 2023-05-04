@@ -4,4 +4,5 @@ export const endpoint = {
   tps: "/tps",
   collection: "/collection",
   alternative: "/alternative",
+  ahp: "/ahp",
 };
