@@ -8,6 +8,24 @@ export const useCollectionStore = defineStore("collectionStore", () => {
   const tablesSelectedData = ref(null);
   const loading = ref(false);
   const err = ref(null);
+  const activeID = ref(null);
+
+  const checkIfClassActive = (collectionID) => {
+    if (collectionID === activeID.value) {
+      return "active";
+    }
+  };
+
+  const setActiveClass = () => {
+    activeID.value = tablesSelectedData.value.id;
+  };
+
+  const checkIfCalculated = (boolean) => {
+    if (boolean) {
+      return "isCalculated";
+    }
+    return "";
+  };
 
   const tableFields = [
     { key: "id", thClass: "d-none", tdClass: "d-none" },
@@ -79,7 +97,6 @@ export const useCollectionStore = defineStore("collectionStore", () => {
       delete el.created_by;
       delete el.created_at;
       delete el.created_by;
-      delete el.is_calculated;
     });
   };
 
@@ -115,6 +132,9 @@ export const useCollectionStore = defineStore("collectionStore", () => {
     selectingTablesData,
     getSelectedTables,
     loading,
+    checkIfClassActive,
+    setActiveClass,
+    checkIfCalculated,
     err,
   };
 });

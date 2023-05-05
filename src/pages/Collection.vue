@@ -155,19 +155,13 @@ let nama = ref("");
 let deskripsi = ref("");
 let isFormAdd = ref(true);
 
-// selected: 10,
-//   (options) => [
-//     { value: 10, text: "10" },
-//     { value: 20, text: "20" },
-//     { value: 50, text: "50" },
-//     { value: 100, text: "100" },
-//   ];
-
 const handlerForm = () => {
   if (isFormAdd.value) {
     let payload = {
       nama: sanitize(nama.value),
       deskripsi: sanitize(deskripsi.value),
+      score_is_calculated: false,
+      final_score_is_calculated: false,
     };
     store.addCollection(payload);
   } else {
@@ -175,6 +169,8 @@ const handlerForm = () => {
       id: store.getSelectedTables.value.id,
       nama: sanitize(nama.value),
       deskripsi: sanitize(deskripsi.value),
+      score_is_calculated: false,
+      final_score_is_calculated: false,
     };
     store.updateCollection(payload);
   }
