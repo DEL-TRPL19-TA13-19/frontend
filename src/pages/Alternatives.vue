@@ -9,8 +9,12 @@
         <div v-for="collection in collectionStore.getTables">
           <b-card
             style="width: 15vw"
-            class="shadow mb-4 mx-auto"
-            @click="collectionStore.selectingTablesData(collection)"
+            class="shadow mb-4 mx-auto collectionCard"
+            :class="collectionStore.checkIfClassActive(collection.id)"
+            @click="
+              collectionStore.selectingTablesData(collection);
+              collectionStore.setActiveClass();
+            "
           >
             <b-card-body class="text-center border-0 mt-4 mb-4">{{
               collection.nama
@@ -46,7 +50,8 @@
           </div>
         </div>
         <hr />
-        <div class="table-card">
+        <MessageEmptyCollection v-if="!canClickAdd" />
+        <div class="table-card" v-if="canClickAdd">
           <div class="table-card-title">
             <h5><font-awesome-icon icon="fa-solid fa-table" /></h5>
             <h5>A l t e r n a t i v e s</h5>
@@ -250,6 +255,7 @@ import {
 } from "@/utils/options";
 import Loading from "@/components/Loading.vue";
 import { useCollectionStore } from "@/store/Collection";
+import MessageEmptyCollection from "@/components/MessageEmptyCollection.vue";
 
 const alternativeStore = useAlternativeStore();
 

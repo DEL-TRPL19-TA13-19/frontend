@@ -31,12 +31,25 @@ export const useScoreStore = defineStore("scoreStore", () => {
   ];
 
   const calculateScore = async (collectionID) => {
-    scores.value = [];
     loading.value = true;
     try {
       const response = await AHPServices.calculateScoreByCollectionID(
         collectionID
       );
+    } catch (err) {
+      err.value = err.data;
+    } finally {
+      loading.value = false;
+      await getScores(collectionID);
+    }
+  };
+
+  const getScores = async (collectionID) => {
+    scores.value = [];
+    loading.value = true;
+
+    try {
+      const response = await AHPServices.getScoresByCollectionID(collectionID);
       scores.value = response.data.data;
     } catch (err) {
       err.value = err.data;
@@ -67,6 +80,7 @@ export const useScoreStore = defineStore("scoreStore", () => {
   return {
     calculateScore,
     setTableMatrix,
+    getScores,
     err,
     tableMatrix,
     getTableMatrix,

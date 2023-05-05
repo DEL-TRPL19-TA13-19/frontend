@@ -38,7 +38,7 @@
         prepend-icon="mdi-forum"
         value="alternatives"
       >
-        <v-icon id="icon" icon="fas fa-users"></v-icon>
+        <v-icon id="icon" icon="fas fa-cubes"></v-icon>
         Alternative
       </v-list-item>
       <v-list-item

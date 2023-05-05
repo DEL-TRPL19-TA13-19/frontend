@@ -6,12 +6,26 @@
         <div v-for="collection in collectionStore.getTables">
           <b-card
             style="width: 15vw"
-            class="shadow mb-4 mx-auto"
-            @click="collectionStore.selectingTablesData(collection)"
+            class="shadow mb-4 mx-auto collectionCard"
+            :class="collectionStore.checkIfClassActive(collection.id)"
+            @click="
+              collectionStore.selectingTablesData(collection);
+              collectionStore.setActiveClass();
+            "
           >
             <b-card-body class="text-center border-0 mt-4 mb-4">{{
               collection.nama
-            }}</b-card-body>
+            }}</b-card-body
+            ><span
+              class="badge rounded-pill bg-success"
+              v-if="collection.score_is_calculated"
+              >Sudah dihitung</span
+            >
+            <span
+              class="badge rounded-pill bg-secondary"
+              v-if="!collection.score_is_calculated"
+              >Belum dihitung</span
+            >
           </b-card>
         </div></b-col
       >
@@ -24,9 +38,17 @@
         </div>
         <hr />
         <Loading v-if="scoreStore.loading"></Loading>
-        <div class="content" v-if="!scoreStore.loading">
+        <MessageEmptyCollection v-if="!showContent" />
+        <div class="content" v-if="!scoreStore.loading && showContent">
           <!-- Data Alternatif -->
           <div class="custom-card">
+            <ButtonCalculate
+              @click="
+                handlerCalculate(collectionStore.getSelectedTables.value.id)
+              "
+              :text="isCalculated ? 'Hitung ulang' : 'Mulai perhitungan'"
+              class="mb-5"
+            />
             <div class="card-title">
               <h5>
                 <span
@@ -57,7 +79,7 @@
           </div>
 
           <!-- Matriks Keputusan -->
-          <div class="custom-card">
+          <div class="custom-card" ref="matrix">
             <div class="card-title">
               <h5>
                 <span
@@ -109,21 +131,41 @@
 <script setup>
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { useCollectionStore } from "@/store/Collection";
-import { onMounted, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useScoreStore } from "@/store/Scores";
 import { useAlternativeStore } from "@/store/Alternative";
+import ButtonCalculate from "@/components/ButtonCalculate.vue";
+import MessageEmptyCollection from "@/components/MessageEmptyCollection.vue";
 
 const collectionStore = useCollectionStore();
 const alternativeStore = useAlternativeStore();
 const scoreStore = useScoreStore();
 
+const matrix = ref(null);
+
+const isCalculated = ref(false);
+
+let showContent = ref(false);
+
+const handlerCalculate = async (collectionID) => {
+  await scoreStore.calculateScore(collectionID).then(async () => {
+    await scoreStore.setTableMatrix();
+    await collectionStore.fetchCollections();
+  });
+  if (scoreStore.getTableMatrix.length > 0) {
+    isCalculated.value = true;
+    matrix.value.scrollIntoView({ behavior: "smooth" });
+  }
+};
+
 watch(collectionStore.getSelectedTables, (e) => {
+  showContent.value = true;
+
   alternativeStore.fetchAlternatives(e.id).then(() => {
     alternativeStore.setTables();
   });
-
-  scoreStore.calculateScore(e.id).then(() => {
-    scoreStore.setTableMatrix();
+  scoreStore.getScores(e.id).then(() => {
+    isCalculated.value = scoreStore.getTableMatrix.length !== 0;
   });
 });
 
@@ -136,4 +178,8 @@ onMounted(() => {
 
 <style>
 @import "../assets/css/calculation.scss";
+
+.bg-secondary {
+  background-color: #d0d0d0 !important;
+}
 </style>
