@@ -2,37 +2,42 @@
   <!--  <h1>{{ loading ? "Yes" : "No" }}</h1>-->
   <!--  <button @click="login">Test</button>-->
   <div>
-    <b-container fluid="sm" class="login-container col-sm">
+    <b-container fluid="sm" class="login-container col-sm shadow-sm">
       <img
-        src="../assets/images/dlh.png"
+        src="../assets/images/hd.png"
         class="rounded mx-auto d-block dlh-image"
         alt="Dinas Lingkungan Hidup"
       />
-      <h5 class="login-label">Dinas Lingkungan Hidup</h5>
+      <h4 class="login-label">Sistem Pendukung Keputusan</h4>
+      <h5>Metode AHP</h5>
       <hr />
-      <h1 class="login-label">LOGIN</h1>
-<!--      <router-link to="/">Dashboard</router-link>-->
+      <!--      <router-link to="/">Dashboard</router-link>-->
       <b-form>
         <b-form-group
           id="input-group-username"
           label="Username"
           label-for="input-username"
-          label-cols-sm="3"
+          class="text-left"
         >
-          <b-form-input id="input-username" type="text" required>
+          <b-form-input
+            id="input-username"
+            type="text"
+            required
+            placeholder="Username"
+          >
           </b-form-input>
         </b-form-group>
         <b-form-group
           id="input-group-password"
           label="Password"
+          class="text-left"
           label-for="input-password"
-          label-cols-sm="3"
         >
           <b-form-input id="input-password" type="text" required>
           </b-form-input>
         </b-form-group>
         <b-button
-          class="login-button"
+          class="login-button w-25 mt-4"
           type="submit"
           variant="primary"
           align-h="center"
