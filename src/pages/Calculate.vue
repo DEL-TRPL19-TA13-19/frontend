@@ -60,6 +60,7 @@
             </div>
             <div class="card-body p-5 mx-auto">
               <b-table
+                v-if="alternativeStore.getTables.length !== 0"
                 style="
                   display: block;
                   overflow-y: scroll;
@@ -91,6 +92,7 @@
             </div>
             <div class="card-body p-5 mx-auto">
               <b-table
+                v-if="scoreStore.getTableAlternativesPoint.length !== 0"
                 style="
                   display: block;
                   overflow-y: scroll;
@@ -115,11 +117,12 @@
                   ><font-awesome-icon
                     id="icon"
                     icon="fa-solid fa-table" /></span
-                >Data Perhitungan dengan bobot kriteria
+                >Data Nilai Alternative x bobot kriteria
               </h5>
             </div>
             <div class="card-body p-5 mx-auto">
               <b-table
+                v-if="scoreStore.getTableScores.length !== 0"
                 style="
                   display: block;
                   overflow-y: scroll;
@@ -180,23 +183,20 @@ const handlerCalculate = async (collectionID) => {
 
 watch(collectionStore.getSelectedTables, (e) => {
   showContent.value = true;
-
   alternativeStore.fetchAlternatives(e.id).then(() => {
     alternativeStore.setTables();
   });
-
-  scoreStore.getScores(e.id).then(() => {
-    if (
-      scoreStore.scores.length === 0 &&
-      scoreStore.alternativesPoint.length === 0
-    ) {
-      isCalculated.value = false;
-    } else {
+  if (e.score_is_calculated) {
+    scoreStore.getScores(e.id).then(async () => {
       scoreStore.setTableScores();
+      await scoreStore.calculateAlternativesPoint(e.id);
       scoreStore.setTableAlternativesPoint();
       isCalculated.value = true;
-    }
-  });
+    });
+  } else {
+    scoreStore.getScores(e.id);
+    isCalculated.value = false;
+  }
 });
 
 onMounted(() => {

@@ -76,6 +76,7 @@ export const useScoreStore = defineStore("scoreStore", () => {
 
   const setTableAlternativesPoint = () => {
     loading.value = true;
+
     alternativesPoint.value.forEach((e, i) => {
       let obj = {};
       obj.nama = scores.value[i].nama;
@@ -88,6 +89,7 @@ export const useScoreStore = defineStore("scoreStore", () => {
       obj.aksesibilitas = e[6];
       tableAlternativesPoint.value.push(obj);
     });
+
     loading.value = false;
   };
 
