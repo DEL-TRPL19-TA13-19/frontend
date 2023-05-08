@@ -13,10 +13,10 @@
               collectionStore.setActiveClass();
             "
           >
-            <b-card-body class="text-center border-0 mt-4 mb-4">{{
-              collection.nama
-            }}</b-card-body
-            ><span
+            <b-card-body class="text-center border-0 mt-4 mb-4"
+              >{{ collection.nama }}
+            </b-card-body>
+            <span
               class="badge rounded-pill bg-success"
               v-if="collection.score_is_calculated"
               >Sudah dihitung</span
@@ -27,8 +27,8 @@
               >Belum dihitung</span
             >
           </b-card>
-        </div></b-col
-      >
+        </div>
+      </b-col>
       <b-col cols="9">
         <div class="title">
           <h3>
@@ -73,7 +73,7 @@
                 caption-top
                 class="shadow-sm border mx-auto"
                 :items="alternativeStore.getTables"
-                :fields="scoreStore.getTableFieldAlternatives"
+                :fields="alternativeStore.getFieldsCalculateTables"
               ></b-table>
             </div>
           </div>
@@ -86,7 +86,36 @@
                   ><font-awesome-icon
                     id="icon"
                     icon="fa-solid fa-table" /></span
-                >Matriks Keputusan (X)
+                >Data Nilai Alternative
+              </h5>
+            </div>
+            <div class="card-body p-5 mx-auto">
+              <b-table
+                style="
+                  display: block;
+                  overflow-y: scroll;
+                  overflow-x: scroll;
+                  width: max-content;
+                  height: max-content;
+                  font-size: 14px;
+                "
+                striped
+                hover
+                class="shadow-sm border mx-auto"
+                :items="scoreStore.getTableAlternativesPoint"
+              ></b-table>
+            </div>
+          </div>
+
+          <!-- Data Perhitungan Nilai  Atribut -->
+          <div class="custom-card">
+            <div class="card-title">
+              <h5>
+                <span
+                  ><font-awesome-icon
+                    id="icon"
+                    icon="fa-solid fa-table" /></span
+                >Data Perhitungan dengan bobot kriteria
               </h5>
             </div>
             <div class="card-body p-5 mx-auto">
@@ -102,28 +131,12 @@
                 striped
                 hover
                 class="shadow-sm border mx-auto"
-                :items="scoreStore.getTableMatrix"
-                :fields="scoreStore.getTableFieldMatrix"
+                :items="scoreStore.getTableScores"
               ></b-table>
             </div>
           </div>
-
-          <!-- Data Perhitungan Nilai  Atribut -->
-          <div class="custom-card">
-            <div class="card-title">
-              <h5>
-                <span
-                  ><font-awesome-icon
-                    id="icon"
-                    icon="fa-solid fa-table" /></span
-                >Data Perhitungan Nilai Atribut
-              </h5>
-            </div>
-            <div class="card-body">
-              <b-table striped hover />
-            </div>
-          </div></div
-      ></b-col>
+        </div>
+      </b-col>
     </b-row>
   </b-container>
 </template>
@@ -149,10 +162,17 @@ let showContent = ref(false);
 
 const handlerCalculate = async (collectionID) => {
   await scoreStore.calculateScore(collectionID).then(async () => {
-    await scoreStore.setTableMatrix();
-    await collectionStore.fetchCollections();
+    await scoreStore.setTableScores();
   });
-  if (scoreStore.getTableMatrix.length > 0) {
+  await scoreStore.calculateAlternativesPoint(collectionID).then(async () => {
+    await scoreStore.setTableAlternativesPoint();
+  });
+  await collectionStore.fetchCollections();
+
+  if (
+    scoreStore.getTableScores.length > 0 &&
+    scoreStore.getTableAlternativesPoint.length > 0
+  ) {
     isCalculated.value = true;
     matrix.value.scrollIntoView({ behavior: "smooth" });
   }
@@ -164,8 +184,18 @@ watch(collectionStore.getSelectedTables, (e) => {
   alternativeStore.fetchAlternatives(e.id).then(() => {
     alternativeStore.setTables();
   });
+
   scoreStore.getScores(e.id).then(() => {
-    isCalculated.value = scoreStore.getTableMatrix.length !== 0;
+    if (
+      scoreStore.scores.length === 0 &&
+      scoreStore.alternativesPoint.length === 0
+    ) {
+      isCalculated.value = false;
+    } else {
+      scoreStore.setTableScores();
+      scoreStore.setTableAlternativesPoint();
+      isCalculated.value = true;
+    }
   });
 });
 

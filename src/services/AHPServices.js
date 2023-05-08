@@ -8,8 +8,12 @@ class AHPServices {
   getScoresByCollectionID(collectionID) {
     return api.get(`${endpoint.ahp}/scores/${collectionID}`);
   }
+
   getFinalScoresByCollectionID(collectionID) {
     return api.get(`${endpoint.ahp}/final_scores/${collectionID}`);
+  }
+  calculateAlternativesPoint(collectionID) {
+    return api.get(`${endpoint.ahp}/point/calculate/${collectionID}`);
   }
 
   calculateScoreByCollectionID(collectionID) {

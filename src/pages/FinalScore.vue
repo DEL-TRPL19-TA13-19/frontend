@@ -107,6 +107,10 @@ const handlerCalculate = async (collectionID) => {
 
 watch(collectionStore.getSelectedTables, (e) => {
   showContent.value = true;
+  finalScoreStore.getFinalScores(e.id).then(() => {
+    finalScoreStore.setTableFinalScore();
+    isCalculated.value = finalScoreStore.getTableFinalScore.length !== 0;
+  });
 });
 
 onMounted(() => {

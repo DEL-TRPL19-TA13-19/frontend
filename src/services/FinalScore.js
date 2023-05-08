@@ -8,12 +8,6 @@ export const useFinalScoreStore = defineStore("finalScoreStore", () => {
   const loading = ref(false);
   const err = ref(null);
 
-  const tableFieldsFinalScore = [
-    { key: "nama", sortable: true },
-    { key: "score", sortable: true },
-    { key: "rank", sortable: true },
-  ];
-
   const calculateFinalScore = async (collectionID) => {
     loading.value = true;
     try {
@@ -24,11 +18,13 @@ export const useFinalScoreStore = defineStore("finalScoreStore", () => {
       err.value = err.data;
     } finally {
       loading.value = false;
+      tableFinalScores.value = [];
       await getFinalScores(collectionID);
     }
   };
 
   const getFinalScores = async (collectionID) => {
+    tableFinalScores.value = [];
     finalScores.value = [];
     loading.value = true;
 
@@ -62,14 +58,13 @@ export const useFinalScoreStore = defineStore("finalScoreStore", () => {
   };
 
   const getTableFinalScore = computed(() => tableFinalScores.value);
-  const getTableFieldsFinalScore = computed(() => tableFieldsFinalScore);
 
   return {
     calculateFinalScore,
     setTableFinalScore,
+    getFinalScores,
     tableFinalScores,
     getTableFinalScore,
-    getTableFieldsFinalScore,
     err,
     loading,
     finalScores,
