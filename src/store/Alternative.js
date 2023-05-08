@@ -23,6 +23,18 @@ export const useAlternativeStore = defineStore("alternativeStore", () => {
     { key: "actions" },
   ];
 
+  const tableCalculateFields = [
+    { key: "id", thClass: "d-none", tdClass: "d-none" },
+    { key: "nama", sortable: true },
+    { key: "aksesibilitas", sortable: true },
+    { key: "cakupan_rumah", sortable: true },
+    { key: "jarak_pemukiman", sortable: true },
+    { key: "jarak_sungai", sortable: true },
+    { key: "jarak_tpa", sortable: true },
+    { key: "partisipasi_masyarakat", sortable: true },
+    { key: "timbulan_sampah", sortable: true },
+  ];
+
   const fetchAlternatives = async (id) => {
     alternatives.value = [];
     loading.value = true;
@@ -91,7 +103,7 @@ export const useAlternativeStore = defineStore("alternativeStore", () => {
 
   const getTables = computed(() => tablesData.value);
   const getFieldsTables = computed(() => tableFields);
-  const getFieldsCalculateTables = computed(() => tableFieldsCalculate);
+  const getFieldsCalculateTables = computed(() => tableCalculateFields);
 
   const getSearchTables = computed(() => tablesSearchData.value);
   const getSelectedTables = computed(() => tablesSelectedData);

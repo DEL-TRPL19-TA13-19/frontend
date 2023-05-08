@@ -13,10 +13,10 @@
               collectionStore.setActiveClass();
             "
           >
-            <b-card-body class="text-center border-0 mt-4 mb-4">{{
-              collection.nama
-            }}</b-card-body
-            ><span
+            <b-card-body class="text-center border-0 mt-4 mb-4"
+              >{{ collection.nama }}
+            </b-card-body>
+            <span
               class="badge rounded-pill bg-success"
               v-if="collection.score_is_calculated"
               >Sudah dihitung</span
@@ -27,8 +27,8 @@
               >Belum dihitung</span
             >
           </b-card>
-        </div></b-col
-      >
+        </div>
+      </b-col>
       <b-col cols="9">
         <div class="title">
           <h3>
@@ -60,6 +60,7 @@
             </div>
             <div class="card-body p-5 mx-auto">
               <b-table
+                v-if="alternativeStore.getTables.length !== 0"
                 style="
                   display: block;
                   overflow-y: scroll;
@@ -73,7 +74,7 @@
                 caption-top
                 class="shadow-sm border mx-auto"
                 :items="alternativeStore.getTables"
-                :fields="scoreStore.getTableFieldAlternatives"
+                :fields="alternativeStore.getFieldsCalculateTables"
               ></b-table>
             </div>
           </div>
@@ -86,24 +87,24 @@
                   ><font-awesome-icon
                     id="icon"
                     icon="fa-solid fa-table" /></span
-                >Matriks Keputusan (X)
+                >Data Nilai Alternative
               </h5>
             </div>
             <div class="card-body p-5 mx-auto">
               <b-table
+                v-if="scoreStore.getTableAlternativesPoint.length !== 0"
                 style="
                   display: block;
                   overflow-y: scroll;
                   overflow-x: scroll;
-                  height: 50vh;
-                  width: 55vw;
+                  width: max-content;
+                  height: max-content;
                   font-size: 14px;
                 "
                 striped
                 hover
                 class="shadow-sm border mx-auto"
-                :items="scoreStore.getTableMatrix"
-                :fields="scoreStore.getTableFieldMatrix"
+                :items="scoreStore.getTableAlternativesPoint"
               ></b-table>
             </div>
           </div>
@@ -116,14 +117,29 @@
                   ><font-awesome-icon
                     id="icon"
                     icon="fa-solid fa-table" /></span
-                >Data Perhitungan Nilai Atribut
+                >Data Nilai Alternative x bobot kriteria
               </h5>
             </div>
-            <div class="card-body">
-              <b-table striped hover />
+            <div class="card-body p-5 mx-auto">
+              <b-table
+                v-if="scoreStore.getTableScores.length !== 0"
+                style="
+                  display: block;
+                  overflow-y: scroll;
+                  overflow-x: scroll;
+                  height: 50vh;
+                  width: 55vw;
+                  font-size: 14px;
+                "
+                striped
+                hover
+                class="shadow-sm border mx-auto"
+                :items="scoreStore.getTableScores"
+              ></b-table>
             </div>
-          </div></div
-      ></b-col>
+          </div>
+        </div>
+      </b-col>
     </b-row>
   </b-container>
 </template>
@@ -149,10 +165,17 @@ let showContent = ref(false);
 
 const handlerCalculate = async (collectionID) => {
   await scoreStore.calculateScore(collectionID).then(async () => {
-    await scoreStore.setTableMatrix();
-    await collectionStore.fetchCollections();
+    await scoreStore.setTableScores();
   });
-  if (scoreStore.getTableMatrix.length > 0) {
+  await scoreStore.calculateAlternativesPoint(collectionID).then(async () => {
+    await scoreStore.setTableAlternativesPoint();
+  });
+  await collectionStore.fetchCollections();
+
+  if (
+    scoreStore.getTableScores.length > 0 &&
+    scoreStore.getTableAlternativesPoint.length > 0
+  ) {
     isCalculated.value = true;
     matrix.value.scrollIntoView({ behavior: "smooth" });
   }
@@ -160,13 +183,20 @@ const handlerCalculate = async (collectionID) => {
 
 watch(collectionStore.getSelectedTables, (e) => {
   showContent.value = true;
-
   alternativeStore.fetchAlternatives(e.id).then(() => {
     alternativeStore.setTables();
   });
-  scoreStore.getScores(e.id).then(() => {
-    isCalculated.value = scoreStore.getTableMatrix.length !== 0;
-  });
+  if (e.score_is_calculated) {
+    scoreStore.getScores(e.id).then(async () => {
+      scoreStore.setTableScores();
+      await scoreStore.calculateAlternativesPoint(e.id);
+      scoreStore.setTableAlternativesPoint();
+      isCalculated.value = true;
+    });
+  } else {
+    scoreStore.getScores(e.id);
+    isCalculated.value = false;
+  }
 });
 
 onMounted(() => {

@@ -13,9 +13,9 @@
               collectionStore.setActiveClass();
             "
           >
-            <b-card-body class="text-center border-0 mt-4 mb-4">{{
-              collection.nama
-            }}</b-card-body>
+            <b-card-body class="text-center border-0 mt-4 mb-4"
+              >{{ collection.nama }}
+            </b-card-body>
             <span
               class="badge rounded-pill bg-success"
               v-if="collection.final_score_is_calculated"
@@ -29,8 +29,8 @@
           </b-card>
         </div>
       </b-col>
-      <b-col cols="9"
-        ><div class="title">
+      <b-col cols="9">
+        <div class="title">
           <div>
             <h3>
               <font-awesome-icon id="icon" icon="fa-solid fa-ranking-star" />
@@ -107,6 +107,15 @@ const handlerCalculate = async (collectionID) => {
 
 watch(collectionStore.getSelectedTables, (e) => {
   showContent.value = true;
+  if (e.final_score_is_calculated) {
+    finalScoreStore.getFinalScores(e.id).then(() => {
+      finalScoreStore.setTableFinalScore();
+      isCalculated.value = true;
+    });
+  } else {
+    finalScoreStore.getFinalScores(e.id);
+    isCalculated.value = false;
+  }
 });
 
 onMounted(() => {
@@ -118,6 +127,7 @@ onMounted(() => {
 
 <style>
 @import "../assets/css/result.scss";
+
 .bg-secondary {
   background-color: #d0d0d0 !important;
 }
