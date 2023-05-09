@@ -48,7 +48,7 @@
         value="calculates"
       >
         <v-icon id="icon" icon="fas fa-calculator"></v-icon>
-        Calculate
+        Hitung
       </v-list-item>
       <v-list-item
         id="list-item"

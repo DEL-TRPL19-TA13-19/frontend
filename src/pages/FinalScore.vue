@@ -83,7 +83,7 @@
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { onMounted, ref, watch } from "vue";
 import { useCollectionStore } from "@/store/Collection";
-import { useFinalScoreStore } from "@/services/FinalScore";
+import { useFinalScoreStore } from "@/store/FinalScore";
 import MessageEmptyCollection from "@/components/MessageEmptyCollection.vue";
 import ButtonCalculate from "@/components/ButtonCalculate.vue";
 import Loading from "@/components/Loading.vue";

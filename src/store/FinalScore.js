@@ -45,7 +45,7 @@ export const useFinalScoreStore = defineStore("finalScoreStore", () => {
     finalScores.value.forEach((e, i) => {
       let obj = {};
       obj.nama = e.nama;
-      obj.score = e.final_scores.final_score;
+      obj.score = parseFloat(e.final_scores.final_score.toFixed(2));
 
       tableFinalScores.value.push(obj);
     });
